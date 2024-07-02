@@ -1,0 +1,6 @@
+name: sample html export
+
+on:
+  push:
+    branch:
+      - master
