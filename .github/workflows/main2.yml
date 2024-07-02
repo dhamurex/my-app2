@@ -1,11 +1,11 @@
-name: sample html export
+name: sample html2 export
 
 on:
   push:
     branch:
       - master
     paths:
-      - 'proj2/**'
+      - 'proj1/**'
 
 jobs:
   build:
