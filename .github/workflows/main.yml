@@ -13,20 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-app2 build package
-          path: out
-
       - name: Install netlify CLI
-        run: |
-          curl -fsSL https://cli.netlify.com/download.sh | bash
-          export PATH="$HOME/.netlify-cli:$PATH"
-
+        run: npm install -g netlify-cli
+        
       - name: deploy to netlify
         run: |
           netlify deploy --prod \
-            --dir=out \
+            --dir=. \
             --site ${{ secrets.NETLIFY_SITE_ID}} \
             --auth ${{ secrets.NETLIFY_API_TOKEN}}
