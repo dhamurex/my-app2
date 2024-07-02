@@ -7,28 +7,29 @@ on:
 
 jobs:
   build:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: verify the out folder
-      run: ls -l out
+      - name: verify the out folder
+        run: ls -l out
 
-    - name: upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: my-app2 build package
-        path: out
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-app2 build package
+          path: out
 
-    - name: Install netlify CLI
-      run: |
-         curl -fsSL https://cli.netlify.com/download.sh | bash
-         export PATH="$HOME/.netlify-cli:$PATH"
+      - name: Install netlify CLI
+        run: |
+          curl -fsSL https://cli.netlify.com/download.sh | bash
+          export PATH="$HOME/.netlify-cli:$PATH"
 
-    - name: deploy to netlify
-      run: |
-        netlify deploy --prod \
-          --dir=out \
-          --site ${{ secrets.NETLIFY_SITE_ID}} \
-          --auth ${{ secrets.NETLIFY_API_TOKEN}}
+      - name: deploy to netlify
+        run: |
+          netlify deploy --prod \
+            --dir=out \
+            --site ${{ secrets.NETLIFY_SITE_ID}} \
+            --auth ${{ secrets.NETLIFY_API_TOKEN}}
